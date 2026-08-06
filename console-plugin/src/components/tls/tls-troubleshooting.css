@@ -1,0 +1,241 @@
+/*
+ * TLS Troubleshooting page — visual language.
+ *
+ * Piggybacks on the DNS page's core styles (`.rhcl-dns-flow`,
+ * `.rhcl-dns-step*`, `.rhcl-dns-timeline*`) since the pipeline layout
+ * is identical. Only the pieces that are unique to TLS (KPI cards,
+ * cert-lifetime bar, side-panel details, commands list) live here.
+ */
+
+.rhcl-dns-page.rhcl-tls-page {
+  /* Namespace override so a future DNS-specific tweak doesn't clash
+     with TLS-specific styles rendered inside the shared root. */
+}
+
+/* --------- KPI cards --------- */
+.rhcl-tls-page .rhcl-tls-kpi-grid {
+  margin-top: 4px;
+}
+.rhcl-tls-page .rhcl-tls-kpi-card {
+  height: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--pf-t--global--border--color--default);
+  background: var(--pf-t--global--background--color--floating--default);
+}
+.rhcl-tls-page .rhcl-tls-kpi-title {
+  font-size: 12px;
+  color: var(--pf-v5-global--Color--200);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin-bottom: 6px;
+}
+.rhcl-tls-page .rhcl-tls-kpi-value {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 600;
+}
+/* No background, no rounded square — the coloured icon reads better
+   sitting straight next to the label. The tile look this used to have
+   turned into a dark blob on the dark theme and drew the eye to the
+   wrong thing. */
+.rhcl-tls-page .rhcl-tls-kpi-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+}
+.rhcl-tls-page .rhcl-tls-kpi-secondary {
+  font-size: 12px;
+  color: var(--pf-v5-global--Color--200);
+  margin-top: 6px;
+}
+
+/* --------- Panels --------- */
+.rhcl-tls-page .rhcl-tls-panel {
+  height: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--pf-t--global--border--color--default);
+  background: var(--pf-t--global--background--color--floating--default);
+}
+.rhcl-tls-page .rhcl-tls-panel--flush {
+  padding: 12px 16px;
+}
+.rhcl-tls-page .rhcl-tls-side-panel {
+  height: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--pf-t--global--border--color--default);
+  background: var(--pf-t--global--background--color--floating--default);
+}
+.rhcl-tls-page .rhcl-tls-section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.rhcl-tls-page .rhcl-tls-section-sub {
+  font-size: 13px;
+  color: var(--pf-v5-global--Color--200);
+}
+.rhcl-tls-page .rhcl-tls-empty {
+  font-size: 13px;
+  color: var(--pf-v5-global--Color--200);
+  padding: 8px 0;
+}
+
+/* --------- Details grid used across many cards --------- */
+.rhcl-tls-page .rhcl-tls-details-grid {
+  display: grid;
+  grid-template-columns: 140px minmax(0, 1fr);
+  gap: 4px 12px;
+  font-size: 13px;
+  margin: 0;
+}
+.rhcl-tls-page .rhcl-tls-details-grid dt {
+  color: var(--pf-v5-global--Color--200);
+}
+.rhcl-tls-page .rhcl-tls-details-grid dd {
+  margin: 0;
+  color: var(--pf-t--global--color--regular);
+  overflow-wrap: anywhere;
+}
+
+/* --------- Certificate Lifetime bar --------- */
+.rhcl-tls-page .rhcl-tls-lifetime-heading {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.rhcl-tls-page .rhcl-tls-lifetime-bar {
+  position: relative;
+  height: 14px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--pf-t--global--background--color--secondary--default) 80%, transparent);
+  overflow: hidden;
+}
+.rhcl-tls-page .rhcl-tls-lifetime-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  opacity: 0.5;
+  transition: width 300ms ease-out;
+}
+.rhcl-tls-page .rhcl-tls-lifetime-marker {
+  position: absolute;
+  top: -2px;
+  bottom: -2px;
+  width: 3px;
+  border-left: 3px solid;
+  border-color: inherit;
+  transform: translateX(-1.5px);
+}
+.rhcl-tls-page .rhcl-tls-lifetime-legend {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--pf-v5-global--Color--200);
+  margin-top: 8px;
+}
+
+/* --------- Root Cause --------- */
+.rhcl-tls-page .rhcl-tls-rootcause-headline {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+.rhcl-tls-page .rhcl-tls-rootcause-summary {
+  font-size: 13px;
+  color: var(--pf-t--global--color--regular);
+  margin-bottom: 12px;
+}
+.rhcl-tls-page .rhcl-tls-rec-title {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--pf-v5-global--Color--200);
+  margin-bottom: 4px;
+}
+.rhcl-tls-page .rhcl-tls-rec-list {
+  padding-left: 18px;
+  font-size: 13px;
+  margin: 0;
+}
+.rhcl-tls-page .rhcl-tls-rec-list li {
+  margin-bottom: 4px;
+}
+
+/* --------- Smart recommendations --------- */
+.rhcl-tls-page .rhcl-tls-reco {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.rhcl-tls-page .rhcl-tls-reco li {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--pf-t--global--border--color--default);
+  background: var(--pf-t--global--background--color--secondary--default);
+}
+.rhcl-tls-page .rhcl-tls-reco-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--pf-t--global--color--regular);
+}
+.rhcl-tls-page .rhcl-tls-reco-detail {
+  font-size: 12px;
+  color: var(--pf-v5-global--Color--200);
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+/* --------- Commands panel --------- */
+.rhcl-tls-page .rhcl-tls-commands {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.rhcl-tls-page .rhcl-tls-command-label {
+  font-size: 11px;
+  color: var(--pf-v5-global--Color--200);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  margin-bottom: 2px;
+}
+.rhcl-tls-page .rhcl-tls-command-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--pf-t--global--background--color--secondary--default);
+  border: 1px solid var(--pf-t--global--border--color--default);
+  border-radius: 6px;
+  padding: 6px 8px;
+}
+.rhcl-tls-page .rhcl-tls-command-row code {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+  font-family: ui-monospace, Menlo, Monaco, Consolas, monospace;
+  color: var(--pf-t--global--color--regular);
+}
+
+/* --------- External links panel --------- */
+.rhcl-tls-page .rhcl-tls-links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}

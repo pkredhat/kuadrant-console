@@ -1,0 +1,819 @@
+/*
+ * API Publishing Wizard — full-page layout with persistent sidebar.
+ * Same glass vocabulary as cost-monitoring.css; scoped under
+ * .rhcl-wiz-root so nothing leaks into the Console chrome.
+ */
+
+.rhcl-wiz-root {
+  background: var(--pf-t--global--background--color--secondary--default);
+  min-height: 100%;
+  padding: 24px 32px 48px;
+  --wiz-card-bg: var(--pf-t--global--background--color--floating--default);
+  --wiz-border: var(--pf-t--global--border--color--default);
+  --wiz-text: var(--pf-t--global--text--color--regular);
+  --wiz-subtle: var(--pf-t--global--text--color--subtle);
+  --wiz-brand: var(--pf-t--global--color--brand--default);
+}
+
+/* ---------- Header ---------- */
+.rhcl-wiz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+.rhcl-wiz-header h1 {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--wiz-text);
+  margin: 0;
+}
+.rhcl-wiz-header p {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: var(--wiz-subtle);
+}
+
+/* ---------- Stepper ---------- */
+.rhcl-wiz-stepper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 24px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+.rhcl-wiz-stepper-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: 0;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.rhcl-wiz-stepper-item:disabled {
+  cursor: not-allowed;
+}
+.rhcl-wiz-stepper-dot {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  background: var(--pf-t--global--background--color--secondary--default);
+  border: 1.5px solid var(--wiz-border);
+  color: var(--wiz-subtle);
+}
+.rhcl-wiz-stepper-item.is-current .rhcl-wiz-stepper-dot {
+  background: var(--wiz-brand);
+  border-color: var(--wiz-brand);
+  color: #fff;
+}
+.rhcl-wiz-stepper-item.is-done .rhcl-wiz-stepper-dot {
+  background: transparent;
+  border-color: var(--pf-t--global--color--status--success--default);
+  color: var(--pf-t--global--color--status--success--default);
+}
+.rhcl-wiz-stepper-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--wiz-subtle);
+}
+.rhcl-wiz-stepper-item.is-current .rhcl-wiz-stepper-label {
+  color: var(--wiz-text);
+}
+.rhcl-wiz-stepper-line {
+  width: 22px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--wiz-border);
+  flex-shrink: 0;
+}
+.rhcl-wiz-stepper-line.is-active {
+  background: var(--pf-t--global--color--status--success--default);
+}
+
+/* ---------- Body layout ---------- */
+.rhcl-wiz-body {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 24px;
+  align-items: start;
+}
+@media (max-width: 1100px) {
+  .rhcl-wiz-body {
+    grid-template-columns: 1fr;
+  }
+}
+
+.rhcl-wiz-content {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0) 70%),
+    var(--wiz-card-bg);
+  border: 1px solid var(--wiz-border);
+  border-radius: 12px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 1px 2px rgba(0, 0, 0, 0.2),
+    0 8px 24px -12px rgba(0, 0, 0, 0.35);
+  padding: 28px 32px;
+  min-height: 480px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- Step header ---------- */
+.rhcl-wiz-step-header h2 {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--wiz-text);
+  margin: 0 0 6px;
+}
+.rhcl-wiz-step-header p {
+  font-size: 13px;
+  color: var(--wiz-subtle);
+  margin: 0 0 22px;
+  max-width: 560px;
+  line-height: 1.5;
+}
+
+/* ---------- Two-column step layout ---------- */
+.rhcl-wiz-two-col {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 28px;
+  align-items: start;
+  flex: 1;
+}
+@media (max-width: 900px) {
+  .rhcl-wiz-two-col {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Fields ---------- */
+.rhcl-wiz-field {
+  margin-bottom: 14px;
+}
+.rhcl-wiz-field > label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--wiz-text);
+  margin-bottom: 5px;
+}
+.rhcl-wiz-field-hint {
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--wiz-subtle);
+}
+.rhcl-wiz-field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.rhcl-wiz-input,
+.rhcl-wiz-select {
+  width: 100%;
+  max-width: 420px;
+  padding: 8px 10px;
+  font-size: 13px;
+  border-radius: 8px;
+  border: 1px solid var(--wiz-border);
+  background: var(--pf-t--global--background--color--secondary--default);
+  color: var(--wiz-text);
+}
+.rhcl-wiz-input:focus,
+.rhcl-wiz-select:focus {
+  outline: 2px solid var(--wiz-brand);
+  outline-offset: 1px;
+}
+.rhcl-wiz-radio-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+/* ---------- Validation feedback ---------- */
+.rhcl-wiz-validation {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.rhcl-wiz-validation.ok {
+  background: rgba(62, 134, 53, 0.12);
+  color: var(--pf-t--global--color--status--success--default);
+}
+.rhcl-wiz-validation.warn {
+  background: rgba(240, 171, 0, 0.12);
+  color: var(--pf-t--global--color--status--warning--default);
+}
+
+/* ---------- Template cards ---------- */
+.rhcl-wiz-template-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 14px;
+}
+.rhcl-wiz-template-card {
+  text-align: left;
+  background: var(--pf-t--global--background--color--secondary--default);
+  border: 1.5px solid var(--wiz-border);
+  border-radius: 12px;
+  padding: 16px;
+  cursor: pointer;
+  transition: transform 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
+}
+.rhcl-wiz-template-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--wiz-brand);
+  box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.4);
+}
+.rhcl-wiz-template-card.is-selected {
+  border-color: var(--wiz-brand);
+  background: rgba(0, 102, 204, 0.08);
+}
+.rhcl-wiz-template-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--wiz-text);
+  margin-bottom: 8px;
+}
+.rhcl-wiz-template-bullets {
+  list-style: none;
+  margin: 0 0 10px;
+  padding: 0;
+  font-size: 12px;
+  color: var(--wiz-text);
+}
+.rhcl-wiz-template-bullets li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 0;
+}
+.rhcl-wiz-template-audience {
+  font-size: 11px;
+  color: var(--wiz-subtle);
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+.rhcl-wiz-template-outcome {
+  font-size: 11px;
+  color: var(--wiz-text);
+  line-height: 1.4;
+  font-style: italic;
+}
+
+/* ---------- Diagram ---------- */
+.rhcl-wiz-diagram {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 18px 10px;
+  border: 1px dashed var(--wiz-border);
+  border-radius: 12px;
+}
+.rhcl-wiz-diagram-node {
+  width: 100%;
+  max-width: 220px;
+  text-align: center;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1.5px solid var(--wiz-border);
+  background: var(--pf-t--global--background--color--secondary--default);
+  opacity: 0.55;
+  transition: opacity 200ms ease, border-color 200ms ease;
+}
+.rhcl-wiz-diagram-node--active {
+  opacity: 1;
+  border-color: var(--wiz-brand);
+}
+.rhcl-wiz-diagram-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--wiz-text);
+}
+.rhcl-wiz-diagram-sub {
+  font-size: 10px;
+  color: var(--wiz-subtle);
+  margin-top: 2px;
+  word-break: break-all;
+}
+.rhcl-wiz-diagram-arrow {
+  color: var(--wiz-subtle);
+  font-size: 14px;
+  line-height: 1;
+}
+
+/* ---------- Routes ---------- */
+.rhcl-wiz-routes-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 10px;
+}
+.rhcl-wiz-routes-table th {
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--wiz-subtle);
+  padding: 6px 8px 6px 0;
+  border-bottom: 1px solid var(--wiz-border);
+}
+.rhcl-wiz-routes-table td {
+  padding: 6px 8px 6px 0;
+  vertical-align: middle;
+}
+.rhcl-wiz-route-tree {
+  border: 1px dashed var(--wiz-border);
+  border-radius: 12px;
+  padding: 16px;
+}
+.rhcl-wiz-route-tree-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--wiz-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 10px;
+}
+.rhcl-wiz-route-tree-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  font-size: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.rhcl-wiz-route-tree-item:last-child {
+  border-bottom: 0;
+}
+.rhcl-wiz-route-tree-item code {
+  color: var(--wiz-text);
+}
+.rhcl-wiz-route-tree-arrow {
+  color: var(--wiz-subtle);
+}
+.rhcl-wiz-route-tree-backend {
+  color: var(--wiz-subtle) !important;
+}
+
+/* ---------- Security cards ---------- */
+.rhcl-wiz-auth-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.rhcl-wiz-auth-card {
+  text-align: left;
+  background: var(--pf-t--global--background--color--secondary--default);
+  border: 1.5px solid var(--wiz-border);
+  border-radius: 12px;
+  padding: 14px;
+  cursor: pointer;
+  transition: border-color 150ms ease, background 150ms ease;
+}
+.rhcl-wiz-auth-card:hover {
+  border-color: var(--wiz-brand);
+}
+.rhcl-wiz-auth-card.is-selected {
+  border-color: var(--wiz-brand);
+  background: rgba(0, 102, 204, 0.08);
+}
+.rhcl-wiz-auth-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--wiz-text);
+  margin-bottom: 4px;
+}
+.rhcl-wiz-auth-desc {
+  font-size: 11px;
+  color: var(--wiz-subtle);
+  line-height: 1.4;
+}
+.rhcl-wiz-auth-config {
+  max-width: 460px;
+}
+
+/* ---------- Policies accordion ---------- */
+.rhcl-wiz-policies .pf-v6-c-expandable-section {
+  border: 1px solid var(--wiz-border);
+  border-radius: 10px;
+  margin-bottom: 10px;
+  padding: 6px 12px;
+}
+.rhcl-wiz-policy-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  color: var(--wiz-text);
+}
+.rhcl-wiz-policy-body {
+  padding: 8px 4px 12px 44px;
+}
+.rhcl-wiz-policy-note {
+  font-size: 12px;
+  color: var(--wiz-subtle);
+  max-width: 480px;
+}
+
+/* ---------- Portal preview ---------- */
+.rhcl-wiz-portal-preview-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--wiz-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 10px;
+}
+.rhcl-wiz-portal-card {
+  border: 1px solid var(--wiz-border);
+  border-radius: 12px;
+  padding: 16px;
+  background: var(--pf-t--global--background--color--secondary--default);
+}
+.rhcl-wiz-portal-card-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.rhcl-wiz-portal-card-icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 800;
+  background: rgba(0, 102, 204, 0.15);
+  color: var(--wiz-brand);
+}
+.rhcl-wiz-portal-card-name {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--wiz-text);
+}
+.rhcl-wiz-portal-card-ver {
+  font-size: 11px;
+  color: var(--wiz-subtle);
+}
+.rhcl-wiz-portal-card-desc {
+  font-size: 12px;
+  color: var(--wiz-text);
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+.rhcl-wiz-portal-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.rhcl-wiz-portal-card-tags span {
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--wiz-subtle);
+}
+
+/* ---------- Sidebar ---------- */
+.rhcl-wiz-sidebar {
+  position: sticky;
+  top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.rhcl-wiz-sidebar-section {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0) 70%),
+    var(--wiz-card-bg);
+  border: 1px solid var(--wiz-border);
+  border-radius: 12px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 1px 2px rgba(0, 0, 0, 0.2);
+  padding: 16px;
+}
+.rhcl-wiz-sidebar-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--wiz-subtle);
+  margin-bottom: 10px;
+}
+.rhcl-wiz-readiness-pct {
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--wiz-text);
+  margin-bottom: 6px;
+}
+.rhcl-wiz-readiness-list {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+}
+.rhcl-wiz-readiness-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  padding: 4px 0;
+  color: var(--wiz-subtle);
+}
+.rhcl-wiz-readiness-list li.is-done {
+  color: var(--wiz-text);
+}
+.rhcl-wiz-sidebar-empty {
+  font-size: 12px;
+  color: var(--wiz-subtle);
+  font-style: italic;
+}
+.rhcl-wiz-resource-toggle {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--wiz-text);
+}
+.rhcl-wiz-resource-name {
+  color: var(--wiz-subtle);
+  font-family: monospace;
+  font-size: 11px;
+}
+.rhcl-wiz-yaml {
+  font-size: 10px;
+  line-height: 1.5;
+  background: var(--pf-t--global--background--color--secondary--default);
+  border-radius: 8px;
+  padding: 10px;
+  overflow-x: auto;
+  max-height: 260px;
+  color: var(--wiz-text);
+}
+
+/* ---------- Footer ---------- */
+.rhcl-wiz-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 24px;
+}
+
+/* ---------- Review ---------- */
+.rhcl-wiz-review-block {
+  margin-bottom: 18px;
+}
+.rhcl-wiz-review-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--wiz-subtle);
+  margin-bottom: 8px;
+}
+.rhcl-wiz-review-url {
+  font-size: 14px;
+  color: var(--wiz-brand);
+  word-break: break-all;
+}
+.rhcl-wiz-review-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.rhcl-wiz-review-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 0;
+  font-size: 13px;
+  color: var(--wiz-text);
+}
+
+/* ---------- Success ---------- */
+.rhcl-wiz-success {
+  display: grid;
+  place-items: center;
+  min-height: 80vh;
+}
+.rhcl-wiz-success-inner {
+  max-width: 620px;
+  width: 100%;
+  text-align: center;
+}
+.rhcl-wiz-success-icon {
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 20px;
+  border-radius: 999px;
+  font-size: 30px;
+  color: var(--pf-t--global--color--status--success--default);
+  background: rgba(62, 134, 53, 0.12);
+}
+.rhcl-wiz-success h1 {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--wiz-text);
+  margin: 0 0 6px;
+}
+.rhcl-wiz-success-sub {
+  font-size: 13px;
+  color: var(--wiz-subtle);
+  margin-bottom: 28px;
+}
+.rhcl-wiz-success-url {
+  text-align: left;
+  margin-bottom: 14px;
+}
+.rhcl-wiz-success-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--wiz-subtle);
+  margin-bottom: 5px;
+}
+.rhcl-wiz-success-links {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 24px 0;
+  flex-wrap: wrap;
+}
+.rhcl-wiz-success-resources {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+  border-top: 1px solid var(--wiz-border);
+  padding-top: 18px;
+}
+.rhcl-wiz-success-resource {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--wiz-text);
+}
+
+/* -----------------------------------------------------------------
+ * Multi-backend table (step 2)
+ * ---------------------------------------------------------------- */
+.rhcl-wiz-backend-table {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid var(--wiz-border);
+  border-radius: 8px;
+  background: var(--wiz-panel);
+}
+.rhcl-wiz-backend-head {
+  display: grid;
+  grid-template-columns: 1.2fr 1.4fr 0.8fr 0.8fr 0.6fr 32px;
+  gap: 8px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--pf-v5-global--Color--200);
+  padding: 0 4px;
+}
+.rhcl-wiz-backend-empty {
+  font-size: 13px;
+  color: var(--pf-v5-global--Color--200);
+  font-style: italic;
+  padding: 8px 4px;
+}
+.rhcl-wiz-backend-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1.4fr 0.8fr 0.8fr 0.6fr 32px;
+  gap: 8px;
+  align-items: center;
+  padding: 4px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--wiz-panel) 60%, transparent);
+}
+.rhcl-wiz-backend-row > .rhcl-wiz-backend-note {
+  grid-column: 1 / -1;
+  font-size: 11px;
+  color: var(--pf-t--global--color--nonstatus--blue--default);
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: color-mix(
+    in srgb,
+    var(--pf-t--global--color--nonstatus--blue--default) 10%,
+    transparent
+  );
+}
+.rhcl-wiz-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--pf-v5-global--Color--200);
+  cursor: pointer;
+  transition: background 120ms, color 120ms;
+}
+.rhcl-wiz-icon-btn:hover {
+  background: color-mix(
+    in srgb,
+    var(--pf-t--global--color--status--danger--default) 12%,
+    transparent
+  );
+  color: var(--pf-t--global--color--status--danger--default);
+}
+.rhcl-wiz-add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px dashed var(--wiz-border);
+  background: transparent;
+  color: var(--pf-t--global--color--brand--default);
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  align-self: flex-start;
+  transition: background 120ms;
+}
+.rhcl-wiz-add-btn:hover {
+  background: color-mix(
+    in srgb,
+    var(--pf-t--global--color--brand--default) 8%,
+    transparent
+  );
+}
+.rhcl-wiz-backend-split {
+  font-size: 12px;
+  color: var(--pf-v5-global--Color--200);
+  padding: 6px 4px 0;
+}
+.rhcl-wiz-backend-split strong {
+  color: var(--pf-t--global--color--regular);
+}
+
+/* -----------------------------------------------------------------
+ * Per-route backend chip picker (step 4)
+ * ---------------------------------------------------------------- */
+.rhcl-wiz-route-backends {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  padding: 4px 0;
+}
+.rhcl-wiz-route-backends-label {
+  font-size: 11px;
+  color: var(--pf-v5-global--Color--200);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  margin-right: 4px;
+}
+.rhcl-wiz-route-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  font-size: 12px;
+  border-radius: 12px;
+  border: 1px solid var(--wiz-border);
+  background: transparent;
+  color: var(--pf-v5-global--Color--200);
+  cursor: pointer;
+  transition: all 120ms;
+}
+.rhcl-wiz-route-chip.is-active {
+  background: color-mix(
+    in srgb,
+    var(--pf-t--global--color--brand--default) 12%,
+    transparent
+  );
+  color: var(--pf-t--global--color--brand--default);
+  border-color: var(--pf-t--global--color--brand--default);
+}
+.rhcl-wiz-route-chip:hover {
+  border-color: var(--pf-t--global--color--brand--default);
+}

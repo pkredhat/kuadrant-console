@@ -1,0 +1,560 @@
+[
+  {
+    "type": "console.navigation/section",
+    "properties": {
+      "id": "connectivity-link",
+      "name": "%plugin__kuadrant-console~Kuadrant Console%",
+      "perspective": "admin"
+    }
+  },
+  {
+    "type": "console.navigation/href",
+    "properties": {
+      "id": "connectivity-link-overview",
+      "name": "%plugin__kuadrant-console~Overview%",
+      "href": "/connectivity-link",
+      "perspective": "admin",
+      "section": "connectivity-link"
+    }
+  },
+  {
+    "type": "console.navigation/href",
+    "properties": {
+      "id": "connectivity-link-gateways",
+      "name": "%plugin__kuadrant-console~Gateways%",
+      "href": "/connectivity-link/gateways",
+      "perspective": "admin",
+      "section": "connectivity-link",
+      "insertAfter": "connectivity-link-overview"
+    }
+  },
+  {
+    "type": "console.navigation/href",
+    "properties": {
+      "id": "connectivity-link-httproutes",
+      "name": "%plugin__kuadrant-console~HTTPRoutes%",
+      "href": "/connectivity-link/httproutes",
+      "perspective": "admin",
+      "section": "connectivity-link",
+      "insertAfter": "connectivity-link-gateways"
+    }
+  },
+  {
+    "type": "console.navigation/href",
+    "properties": {
+      "id": "connectivity-link-grpcroutes",
+      "name": "%plugin__kuadrant-console~GRPCRoutes%",
+      "href": "/connectivity-link/grpcroutes",
+      "perspective": "admin",
+      "section": "connectivity-link",
+      "insertAfter": "connectivity-link-httproutes"
+    }
+  },
+  {
+    "type": "console.navigation/href",
+    "properties": {
+      "id": "connectivity-link-policies",
+      "name": "%plugin__kuadrant-console~Policies%",
+      "href": "/connectivity-link/policies",
+      "perspective": "admin",
+      "section": "connectivity-link",
+      "insertAfter": "connectivity-link-grpcroutes"
+    }
+  },
+  {
+    "type": "console.navigation/separator",
+    "properties": {
+      "id": "connectivity-link-separator-dns",
+      "perspective": "admin",
+      "section": "connectivity-link",
+      "insertAfter": "connectivity-link-policies"
+    }
+  },
+  {
+    "type": "console.navigation/href",
+    "properties": {
+      "id": "connectivity-link-dns-overview",
+      "name": "%plugin__kuadrant-console~DNS Overview%",
+      "href": "/connectivity-link/dns/overview",
+      "perspective": "admin",
+      "section": "connectivity-link",
+      "insertAfter": "connectivity-link-separator-dns"
+    }
+  },
+  {
+    "type": "console.page/route",
+    "properties": {
+      "exact": true,
+      "path": "/connectivity-link/dns/overview",
+      "component": {
+        "$codeRef": "DNSOverviewPage"
+      }
+    }
+  },
+  {
+    "type": "console.navigation/href",
+    "properties": {
+      "id": "connectivity-link-dns-troubleshooting",
+      "name": "%plugin__kuadrant-console~DNS Troubleshooting%",
+      "href": "/connectivity-link/dns/troubleshooting",
+      "perspective": "admin",
+      "section": "connectivity-link",
+      "insertAfter": "connectivity-link-dns-overview"
+    }
+  },
+  {
+    "type": "console.page/route",
+    "properties": {
+      "exact": true,
+      "path": "/connectivity-link/dns/troubleshooting",
+      "component": {
+        "$codeRef": "DNSTroubleshootingPage"
+      }
+    }
+  },
+  {
+    "type": "console.navigation/href",
+    "properties": {
+      "id": "connectivity-link-tls-overview",
+      "name": "%plugin__kuadrant-console~TLS Overview%",
+      "href": "/connectivity-link/tls/overview",
+      "perspective": "admin",
+      "section": "connectivity-link",
+      "insertAfter": "connectivity-link-dns-troubleshooting"
+    }
+  },
+  {
+    "type": "console.page/route",
+    "properties": {
+      "exact": true,
+      "path": "/connectivity-link/tls/overview",
+      "component": {
+        "$codeRef": "TLSOverviewPage"
+      }
+    }
+  },
+  {
+    "type": "console.navigation/href",
+    "properties": {
+      "id": "connectivity-link-tls-troubleshooting",
+      "name": "%plugin__kuadrant-console~TLS Troubleshooting%",
+      "href": "/connectivity-link/tls/troubleshooting",
+      "perspective": "admin",
+      "section": "connectivity-link",
+      "insertAfter": "connectivity-link-tls-overview"
+    }
+  },
+  {
+    "type": "console.page/route",
+    "properties": {
+      "exact": true,
+      "path": "/connectivity-link/tls/troubleshooting",
+      "component": {
+        "$codeRef": "TLSTroubleshootingPage"
+      }
+    }
+  },
+  {
+    "type": "console.navigation/separator",
+    "properties": {
+      "id": "connectivity-link-separator",
+      "perspective": "admin",
+      "section": "connectivity-link",
+      "insertAfter": "connectivity-link-tls-troubleshooting"
+    }
+  },
+  {
+    "type": "console.navigation/href",
+    "properties": {
+      "id": "connectivity-link-api-products",
+      "name": "%plugin__kuadrant-console~API Products%",
+      "href": "/connectivity-link/api-products",
+      "perspective": "admin",
+      "section": "connectivity-link",
+      "insertAfter": "connectivity-link-separator"
+    }
+  },
+  {
+    "type": "console.navigation/href",
+    "properties": {
+      "id": "connectivity-link-plans",
+      "name": "%plugin__kuadrant-console~Plans%",
+      "href": "/connectivity-link/plans",
+      "perspective": "admin",
+      "section": "connectivity-link",
+      "insertAfter": "connectivity-link-api-products"
+    }
+  },
+  {
+    "type": "console.navigation/href",
+    "properties": {
+      "id": "connectivity-link-apikeys",
+      "name": "%plugin__kuadrant-console~API Keys%",
+      "href": "/connectivity-link/apikeys",
+      "perspective": "admin",
+      "section": "connectivity-link",
+      "insertAfter": "connectivity-link-plans"
+    }
+  },
+  {
+    "type": "console.navigation/href",
+    "properties": {
+      "id": "connectivity-link-cost",
+      "name": "%plugin__kuadrant-console~Cost%",
+      "href": "/connectivity-link/cost",
+      "perspective": "admin",
+      "section": "connectivity-link",
+      "insertAfter": "connectivity-link-apikeys"
+    }
+  },
+  {
+    "type": "console.page/route",
+    "properties": {
+      "exact": true,
+      "path": "/connectivity-link/cost",
+      "component": {
+        "$codeRef": "CostMonitoringPage"
+      }
+    }
+  },
+  {
+    "type": "console.navigation/href",
+    "properties": {
+      "id": "connectivity-link-ai-gateway",
+      "name": "%plugin__kuadrant-console~AI Gateway%",
+      "href": "/connectivity-link/ai-gateway",
+      "perspective": "admin",
+      "section": "connectivity-link",
+      "insertAfter": "connectivity-link-cost"
+    }
+  },
+  {
+    "type": "console.page/route",
+    "properties": {
+      "exact": true,
+      "path": "/connectivity-link/ai-gateway",
+      "component": {
+        "$codeRef": "AIGatewayPage"
+      }
+    }
+  },
+  {
+    "type": "console.navigation/separator",
+    "properties": {
+      "id": "connectivity-link-separator-mcp",
+      "perspective": "admin",
+      "section": "connectivity-link",
+      "insertAfter": "connectivity-link-cost"
+    }
+  },
+  {
+    "type": "console.navigation/href",
+    "properties": {
+      "id": "connectivity-link-mcp-servers",
+      "name": "%plugin__kuadrant-console~MCP Servers%",
+      "href": "/connectivity-link/mcp-servers",
+      "perspective": "admin",
+      "section": "connectivity-link",
+      "insertAfter": "connectivity-link-separator-mcp"
+    }
+  },
+  {
+    "type": "console.navigation/href",
+    "properties": {
+      "id": "connectivity-link-settings",
+      "name": "%plugin__kuadrant-console~Settings%",
+      "href": "/connectivity-link/settings",
+      "perspective": "admin",
+      "section": "connectivity-link",
+      "insertAfter": "connectivity-link-mcp-servers"
+    }
+  },
+  {
+    "type": "console.page/route",
+    "properties": {
+      "exact": true,
+      "path": "/connectivity-link/settings",
+      "component": {
+        "$codeRef": "SettingsPage"
+      }
+    }
+  },
+  {
+    "type": "console.flag/hookProvider",
+    "properties": {
+      "handler": {
+        "$codeRef": "developerPortalFlag.useDeveloperPortalFlag"
+      }
+    }
+  },
+  {
+    "type": "console.navigation/separator",
+    "properties": {
+      "id": "connectivity-link-separator-portals",
+      "perspective": "admin",
+      "section": "connectivity-link",
+      "insertAfter": "connectivity-link-settings"
+    },
+    "flags": {
+      "required": [
+        "DEVELOPER_PORTAL_URL_PRESENT"
+      ]
+    }
+  },
+  {
+    "type": "console.navigation/href",
+    "properties": {
+      "id": "connectivity-link-developer-portal",
+      "name": "%plugin__kuadrant-console~Developer Portal%",
+      "href": "/connectivity-link/developer-portal",
+      "perspective": "admin",
+      "section": "connectivity-link",
+      "insertAfter": "connectivity-link-separator-portals"
+    },
+    "flags": {
+      "required": [
+        "DEVELOPER_PORTAL_URL_PRESENT"
+      ]
+    }
+  },
+  {
+    "type": "console.page/route",
+    "properties": {
+      "exact": true,
+      "path": "/connectivity-link/developer-portal",
+      "component": {
+        "$codeRef": "DeveloperPortalRedirect"
+      }
+    },
+    "flags": {
+      "required": [
+        "DEVELOPER_PORTAL_URL_PRESENT"
+      ]
+    }
+  },
+  {
+    "type": "console.flag/hookProvider",
+    "properties": {
+      "handler": {
+        "$codeRef": "internalDeveloperHubFlag.useInternalDeveloperHubFlag"
+      }
+    }
+  },
+  {
+    "type": "console.navigation/href",
+    "properties": {
+      "id": "connectivity-link-developer-hub",
+      "name": "%plugin__kuadrant-console~Internal Developer Hub%",
+      "href": "/connectivity-link/developer-hub",
+      "perspective": "admin",
+      "section": "connectivity-link",
+      "insertAfter": "connectivity-link-developer-portal"
+    },
+    "flags": {
+      "required": [
+        "INTERNAL_DEVELOPER_HUB_URL_PRESENT"
+      ]
+    }
+  },
+  {
+    "type": "console.page/route",
+    "properties": {
+      "exact": true,
+      "path": "/connectivity-link/developer-hub",
+      "component": {
+        "$codeRef": "InternalDeveloperHubRedirect"
+      }
+    },
+    "flags": {
+      "required": [
+        "INTERNAL_DEVELOPER_HUB_URL_PRESENT"
+      ]
+    }
+  },
+  {
+    "type": "console.page/route",
+    "properties": {
+      "exact": true,
+      "path": "/connectivity-link/plans",
+      "component": {
+        "$codeRef": "PlansListPage"
+      }
+    }
+  },
+  {
+    "type": "console.page/route",
+    "properties": {
+      "exact": true,
+      "path": "/connectivity-link/apikeys",
+      "component": {
+        "$codeRef": "APIKeysListPage"
+      }
+    }
+  },
+  {
+    "type": "console.page/route",
+    "properties": {
+      "exact": true,
+      "path": "/connectivity-link",
+      "component": {
+        "$codeRef": "OverviewPage"
+      }
+    }
+  },
+  {
+    "type": "console.page/route",
+    "properties": {
+      "exact": true,
+      "path": "/connectivity-link/gateways",
+      "component": {
+        "$codeRef": "GatewayListPage"
+      }
+    }
+  },
+  {
+    "type": "console.page/route",
+    "properties": {
+      "path": "/connectivity-link/gateways/:ns/:name",
+      "component": {
+        "$codeRef": "GatewayDetailPage"
+      }
+    }
+  },
+  {
+    "type": "console.page/route",
+    "properties": {
+      "exact": true,
+      "path": "/connectivity-link/httproutes",
+      "component": {
+        "$codeRef": "HTTPRouteListPage"
+      }
+    }
+  },
+  {
+    "type": "console.page/route",
+    "properties": {
+      "path": "/connectivity-link/httproutes/:ns/:name",
+      "component": {
+        "$codeRef": "HTTPRouteDetailPage"
+      }
+    }
+  },
+  {
+    "type": "console.page/route",
+    "properties": {
+      "exact": true,
+      "path": "/connectivity-link/policies",
+      "component": {
+        "$codeRef": "PolicyListPage"
+      }
+    }
+  },
+  {
+    "type": "console.page/route",
+    "properties": {
+      "exact": true,
+      "path": "/connectivity-link/policies/ratelimit/:ns/:name",
+      "component": {
+        "$codeRef": "RateLimitPolicyDetailPage"
+      }
+    }
+  },
+  {
+    "type": "console.page/route",
+    "properties": {
+      "exact": true,
+      "path": "/connectivity-link/policies/auth/:ns/:name",
+      "component": {
+        "$codeRef": "AuthPolicyDetailPage"
+      }
+    }
+  },
+  {
+    "type": "console.page/route",
+    "properties": {
+      "exact": true,
+      "path": "/connectivity-link/policies/tokenratelimit/:ns/:name",
+      "component": {
+        "$codeRef": "TokenRateLimitPolicyDetailPage"
+      }
+    }
+  },
+  {
+    "type": "console.page/route",
+    "properties": {
+      "exact": true,
+      "path": "/connectivity-link/policies/dns/:ns/:name",
+      "component": {
+        "$codeRef": "DNSPolicyDetailPage"
+      }
+    }
+  },
+  {
+    "type": "console.page/route",
+    "properties": {
+      "exact": true,
+      "path": "/connectivity-link/policies/tls/:ns/:name",
+      "component": {
+        "$codeRef": "TLSPolicyDetailPage"
+      }
+    }
+  },
+  {
+    "type": "console.page/route",
+    "properties": {
+      "exact": true,
+      "path": "/connectivity-link/api-products",
+      "component": {
+        "$codeRef": "APIProductListPage"
+      }
+    }
+  },
+  {
+    "type": "console.page/route",
+    "properties": {
+      "exact": true,
+      "path": "/connectivity-link/create-api",
+      "component": {
+        "$codeRef": "CreateApiWizard"
+      }
+    }
+  },
+  {
+    "type": "console.page/route",
+    "properties": {
+      "path": "/connectivity-link/api-products/:ns/:name",
+      "component": {
+        "$codeRef": "APIOverviewPage"
+      }
+    }
+  },
+  {
+    "type": "console.page/route",
+    "properties": {
+      "exact": true,
+      "path": "/connectivity-link/grpcroutes",
+      "component": {
+        "$codeRef": "GRPCRouteListPage"
+      }
+    }
+  },
+  {
+    "type": "console.page/route",
+    "properties": {
+      "exact": true,
+      "path": "/connectivity-link/mcp-servers",
+      "component": {
+        "$codeRef": "MCPServersListPage"
+      }
+    }
+  },
+  {
+    "type": "console.page/route",
+    "properties": {
+      "path": "/connectivity-link/mcp-servers/:ns/:name",
+      "component": {
+        "$codeRef": "MCPServerDetailPage"
+      }
+    }
+  }
+]

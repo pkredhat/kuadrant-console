@@ -1,0 +1,258 @@
+/*
+ * TLS Overview page — visual language.
+ *
+ * Deliberately does NOT import the DNS pipeline styles the
+ * troubleshooting page piggybacks on — this page has its own shape
+ * (dashboard cards, tables, small charts) and doesn't need any of the
+ * flow-arrow / step-card CSS.
+ */
+
+.rhcl-tls-overview-page .rhcl-tls-overview-subtitle {
+  margin-top: 4px;
+  font-size: 14px;
+  color: var(--pf-v5-global--Color--200);
+}
+.rhcl-tls-overview-page .rhcl-tls-overview-lastupdated {
+  font-size: 12px;
+  color: var(--pf-v5-global--Color--200);
+}
+
+/* --------- Shared panel + card look --------- */
+.rhcl-tls-overview-page .rhcl-tls-overview-panel {
+  height: 100%;
+  border-radius: 10px;
+  border: 1px solid var(--pf-t--global--border--color--default);
+  background: var(--pf-t--global--background--color--floating--default);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+.rhcl-tls-overview-page .rhcl-tls-overview-kpi {
+  height: 100%;
+  border-radius: 10px;
+  border: 1px solid var(--pf-t--global--border--color--default);
+  background: var(--pf-t--global--background--color--floating--default);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+/* --------- KPI card internals --------- */
+.rhcl-tls-overview-page .rhcl-tls-overview-kpi-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.rhcl-tls-overview-page .rhcl-tls-overview-kpi-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+}
+.rhcl-tls-overview-page .rhcl-tls-overview-kpi-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--pf-t--global--color--regular);
+}
+.rhcl-tls-overview-page .rhcl-tls-overview-kpi-big {
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--pf-t--global--color--regular);
+}
+.rhcl-tls-overview-page .rhcl-tls-overview-kpi-caption {
+  font-size: 12px;
+  color: var(--pf-v5-global--Color--200);
+  margin-bottom: 8px;
+}
+.rhcl-tls-overview-page .rhcl-tls-overview-kpi-microstats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+/* --------- Overall Health donut row --------- */
+.rhcl-tls-overview-page .rhcl-tls-overview-donut-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.rhcl-tls-overview-page .rhcl-tls-overview-kpi-rows {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+.rhcl-tls-overview-page .rhcl-tls-overview-kpi-row {
+  display: grid;
+  grid-template-columns: 12px minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+  font-size: 12px;
+}
+.rhcl-tls-overview-page .rhcl-tls-overview-kpi-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.rhcl-tls-overview-page .rhcl-tls-overview-kpi-row-label {
+  color: var(--pf-t--global--color--regular);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.rhcl-tls-overview-page .rhcl-tls-overview-kpi-row-value {
+  font-weight: 600;
+  color: var(--pf-t--global--color--regular);
+}
+.rhcl-tls-overview-page .rhcl-tls-overview-kpi-row--clickable {
+  cursor: pointer;
+  padding: 2px 6px;
+  margin: 0 -6px;
+  border-radius: 4px;
+  transition: background 120ms ease-out;
+}
+.rhcl-tls-overview-page .rhcl-tls-overview-kpi-row--clickable:hover,
+.rhcl-tls-overview-page .rhcl-tls-overview-kpi-row--clickable:focus-visible {
+  background: color-mix(in srgb, var(--pf-t--global--color--brand--default) 8%, transparent);
+  outline: none;
+}
+.rhcl-tls-overview-page .rhcl-tls-overview-issuer-item--clickable {
+  cursor: pointer;
+  padding: 2px 6px;
+  margin: 0 -6px;
+  border-radius: 4px;
+  transition: background 120ms ease-out;
+}
+.rhcl-tls-overview-page .rhcl-tls-overview-issuer-item--clickable:hover,
+.rhcl-tls-overview-page .rhcl-tls-overview-issuer-item--clickable:focus-visible {
+  background: color-mix(in srgb, var(--pf-t--global--color--brand--default) 8%, transparent);
+  outline: none;
+}
+
+/* --------- Table header --------- */
+.rhcl-tls-overview-page .rhcl-tls-overview-hostname {
+  color: var(--pf-t--global--color--brand--default);
+  text-decoration: none;
+}
+.rhcl-tls-overview-page .rhcl-tls-overview-hostname:hover {
+  text-decoration: underline;
+}
+
+/* --------- Histogram --------- */
+.rhcl-tls-overview-page .rhcl-tls-overview-histo-caption {
+  font-size: 12px;
+  color: var(--pf-v5-global--Color--200);
+  margin-top: 6px;
+}
+
+/* Expiration Distribution card lets the histogram SVG expand to fill
+   the row height when neighbours (Top Issuers, Recent Events) push
+   the row taller. See dns-overview.css for the same treatment. */
+.rhcl-tls-overview-page .rhcl-tls-overview-panel > .pf-v5-c-card__body,
+.rhcl-tls-overview-page .rhcl-tls-overview-panel > .pf-v6-c-card__body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.rhcl-tls-overview-page .rhcl-tls-overview-histo-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1 1 auto;
+  min-height: 0;
+  /* Centre the fixed-height histogram vertically when the card is
+     stretched to match a tall sibling (Recent Events). See dns-overview.css. */
+  justify-content: center;
+}
+.rhcl-tls-overview-page .rhcl-tls-overview-histo-body > .rhcl-histogram {
+  flex: 0 0 auto;
+}
+
+/* --------- Issuer donut layout --------- */
+.rhcl-tls-overview-page .rhcl-tls-overview-issuer-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.rhcl-tls-overview-page .rhcl-tls-overview-issuer-legend {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.rhcl-tls-overview-page .rhcl-tls-overview-issuer-legend li {
+  display: grid;
+  grid-template-columns: 12px minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+  font-size: 12px;
+}
+.rhcl-tls-overview-page .rhcl-tls-overview-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.rhcl-tls-overview-page .rhcl-tls-overview-issuer-label {
+  color: var(--pf-t--global--color--regular);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.rhcl-tls-overview-page .rhcl-tls-overview-issuer-count {
+  font-weight: 600;
+  color: var(--pf-t--global--color--regular);
+}
+.rhcl-tls-overview-page .rhcl-tls-overview-issuer-pct {
+  font-weight: normal;
+  color: var(--pf-v5-global--Color--200);
+}
+
+/* --------- Recent Events timeline --------- */
+.rhcl-tls-overview-page .rhcl-tls-overview-events {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.rhcl-tls-overview-page .rhcl-tls-overview-events li {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: start;
+}
+.rhcl-tls-overview-page .rhcl-tls-overview-events-icon {
+  padding-top: 2px;
+}
+.rhcl-tls-overview-page .rhcl-tls-overview-events-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--pf-t--global--color--regular);
+  overflow-wrap: anywhere;
+}
+.rhcl-tls-overview-page .rhcl-tls-overview-events-title a {
+  color: var(--pf-t--global--color--brand--default);
+  text-decoration: none;
+}
+.rhcl-tls-overview-page .rhcl-tls-overview-events-title a:hover {
+  text-decoration: underline;
+}
+.rhcl-tls-overview-page .rhcl-tls-overview-events-detail {
+  font-size: 12px;
+  color: var(--pf-v5-global--Color--200);
+  margin-top: 2px;
+  overflow-wrap: anywhere;
+}
+.rhcl-tls-overview-page .rhcl-tls-overview-events-when {
+  font-size: 11px;
+  color: var(--pf-v5-global--Color--200);
+  white-space: nowrap;
+}
