@@ -22,13 +22,10 @@ data:
         {"flightId": "SL-4201", "status": "Boarding", "scheduledDeparture": "2026-09-15T22:00:00Z", "gate": "D22"}
       ]
     }
-  nginx.conf: |
-    server {
-      listen 8080;
-      location /positions { default_type application/json; alias /data/positions.json; }
-      location /status { default_type application/json; alias /data/status.json; }
-      location /healthz { return 200 '{"status":"ok"}'; add_header Content-Type application/json; }
-    }
+  locations.conf: |
+    location /positions { default_type application/json; alias /data/positions.json; }
+    location /status { default_type application/json; alias /data/status.json; }
+    location /healthz { return 200 '{"status":"ok"}'; add_header Content-Type application/json; }
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -52,12 +49,13 @@ spec:
       containers:
         - name: nginx
           image: registry.access.redhat.com/ubi9/nginx-124:latest
+          command: ["nginx", "-g", "daemon off;"]
           ports:
             - containerPort: 8080
           volumeMounts:
             - name: config
-              mountPath: /etc/nginx/conf.d/default.conf
-              subPath: nginx.conf
+              mountPath: /opt/app-root/etc/nginx.default.d/locations.conf
+              subPath: locations.conf
             - name: config
               mountPath: /data/positions.json
               subPath: positions.json

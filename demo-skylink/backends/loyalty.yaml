@@ -20,13 +20,10 @@ data:
         {"type": "award", "description": "Round-trip award ticket (domestic)", "milesCost": 25000, "available": false, "reason": "Blackout dates"}
       ]
     }
-  nginx.conf: |
-    server {
-      listen 8080;
-      location /members { default_type application/json; alias /data/members.json; }
-      location /redeem { default_type application/json; alias /data/redeem.json; }
-      location /healthz { return 200 '{"status":"ok"}'; add_header Content-Type application/json; }
-    }
+  locations.conf: |
+    location /members { default_type application/json; alias /data/members.json; }
+    location /redeem { default_type application/json; alias /data/redeem.json; }
+    location /healthz { return 200 '{"status":"ok"}'; add_header Content-Type application/json; }
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -50,12 +47,13 @@ spec:
       containers:
         - name: nginx
           image: registry.access.redhat.com/ubi9/nginx-124:latest
+          command: ["nginx", "-g", "daemon off;"]
           ports:
             - containerPort: 8080
           volumeMounts:
             - name: config
-              mountPath: /etc/nginx/conf.d/default.conf
-              subPath: nginx.conf
+              mountPath: /opt/app-root/etc/nginx.default.d/locations.conf
+              subPath: locations.conf
             - name: config
               mountPath: /data/members.json
               subPath: members.json

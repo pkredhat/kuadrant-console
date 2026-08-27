@@ -20,13 +20,10 @@ data:
         {"ticketNumber": "098-2345678901", "confirmationCode": "SKYDEF2", "issuedAt": "2026-08-22T14:30:00Z", "fareClass": "Y", "baggageAllowance": {"pieces": 1, "maxWeightKg": 23}}
       ]
     }
-  nginx.conf: |
-    server {
-      listen 8080;
-      location /reservations { default_type application/json; alias /data/reservations.json; }
-      location /tickets { default_type application/json; alias /data/tickets.json; }
-      location /healthz { return 200 '{"status":"ok"}'; add_header Content-Type application/json; }
-    }
+  locations.conf: |
+    location /reservations { default_type application/json; alias /data/reservations.json; }
+    location /tickets { default_type application/json; alias /data/tickets.json; }
+    location /healthz { return 200 '{"status":"ok"}'; add_header Content-Type application/json; }
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -50,12 +47,13 @@ spec:
       containers:
         - name: nginx
           image: registry.access.redhat.com/ubi9/nginx-124:latest
+          command: ["nginx", "-g", "daemon off;"]
           ports:
             - containerPort: 8080
           volumeMounts:
             - name: config
-              mountPath: /etc/nginx/conf.d/default.conf
-              subPath: nginx.conf
+              mountPath: /opt/app-root/etc/nginx.default.d/locations.conf
+              subPath: locations.conf
             - name: config
               mountPath: /data/reservations.json
               subPath: reservations.json
